@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Inventory</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <!-- Side navigation -->
+        <div class="sidenav">
+            <a href="index.html">Dashboard</a>
+            <a href="inventory.html">Inventory</a>
+            <a href="orders.html">Orders</a>
+            <a href="reports.html">Reports</a>
+        </div>
+        <!-- Page content -->
+        <div class="main">
+            <h1>Inventory</h1>
+            <table id="invTable">
+                <thead> 
+                </thead>
+                <tbody>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                </tbody>
+            </table>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'api/products',
+                    type: 'get',
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        let table_data = '';
+                        $.each(data, function (i, v) {
+                            table_data += '<tr>';
+                            table_data += '<td>' + v.category + '</td>';
+                            table_data += '<td>' + v.productName + '</td>';
+                            table_data += '<td>' + v.quantity + '</td>';
+                            table_data += '<td><button class="delButton" id="delete' + i + '">X</button></td></tr>';
+                        });
+                        $('#invTable').append(table_data);
+                        $.each(data, function (i, v) {
+                            console.log(i, v.id);
+                            $("body").delegate("#delete" + i, "click", function () {
+                                swal({
+                                    title: "Confirm Action",
+                                    text: "Once deleted, you will not be able to recover Product Name: " + v.productName + ", ID: " + v.id + ".",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                $.ajax({
+                                                    url: 'api/products/' + v.id,
+                                                    type: 'DELETE',
+                                                    dataType: 'json',
+                                                    success: function () {
+                                                        location.reload();
+                                                    },
+                                                    error: function () {
+                                                        console.log(data[i]);
+                                                        alert('Error occured!');
+                                                    }
+                                                });
+                                            }
+                                        });
+                            });
+                        });
+                    },
+                    error: function () {
+                        alert('Network Communication Error!');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
