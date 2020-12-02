@@ -1,3 +1,4 @@
+/* Comment */
 body {
     background-color: rgb(220,220,220);
 }
@@ -6,14 +7,18 @@ input[type=submit] {
     background-color: palegoldenrod;
 }
 
-.delButton {
-    background-color: darkred; 
-    border: none; 
-    color: white; 
-    padding: 0px 16px; 
-    font-size: 14px; 
-    cursor: pointer; 
+#logoImage {
+    width: 150px;
+    max-width: 150px;
+    height: auto;
+    padding: 6px 8px 6px 4px;
 }
+
+#addForm {
+    display: none;
+}
+
+/* Sidebar CSS */
 
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
@@ -22,7 +27,7 @@ input[type=submit] {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #121;
+    background-color: #93c530;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
 }
@@ -32,7 +37,7 @@ input[type=submit] {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: black;
     display: block;
 }
 
@@ -52,3 +57,56 @@ input[type=submit] {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+/* Table Style */
+
+.delButton {
+    background-color: darkred; 
+    border: none; 
+    color: white; 
+    padding: 0px 16px; 
+    font-size: 14px; 
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.editButton {
+    background-color: midnightblue; 
+    border: none; 
+    color: white; 
+    padding: 0px 16px; 
+    font-size: 14px; 
+    cursor: pointer; 
+}
+
+.btn {
+  margin: 0 6px;
+}
+
+/* Data Table Select Entries */
+.dataTables_wrapper .dataTables_length select { 
+   background-color: white;
+}
+
+/* Data Table Search Bar */
+.dataTables_wrapper .dataTables_filter input {
+   background-color: white;
+}
+
+
+
+/* Data Table Buttons */
+.btn:not(:disabled):not(.disabled) {
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.dt-button {
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+
+
