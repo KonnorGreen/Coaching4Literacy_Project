@@ -1,0 +1,7 @@
+edu\tarleton\coaching4literacy\JAXRSConfiguration.class
+edu\tarleton\coaching4literacy\ProductsWS.class
+edu\tarleton\coaching4literacy\resources\ProductServlet.class
+edu\tarleton\coaching4literacy\Product.class
+edu\tarleton\coaching4literacy\ProductService.class
+edu\tarleton\coaching4literacy\resources\EditServlet.class
+edu\tarleton\coaching4literacy\resources\JavaEE8Resource.class

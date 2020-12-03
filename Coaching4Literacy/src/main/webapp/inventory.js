@@ -15,7 +15,7 @@ $(document).ready(function () {
             });
             $('#invTable').append(table_data);
             $('#invTable').DataTable({
-                dom: 'lfrtipB',
+                dom: 'Bfrtipl',
                 buttons: [
                     {
                         extend: 'print',
@@ -50,7 +50,35 @@ $(document).ready(function () {
                         text: 'Add Item',
                         className: 'btn btn-success',
                         action: function () {
-                            $("#addForm").toggle();
+                            (async () => {
+                        const {value: formValues} = await Swal.fire({
+                            title: 'Add Item',
+                            icon: 'info',
+                            width: '500px',
+                            showCancelButton: true,
+                            html:
+                                    '<label>Category</label><input id="category" class="swal2-input" placeholder="Category"required>' +
+                                    '<label>Name</label><input id="productName" class="swal2-input" placeholder="Name" required>' +
+                                    '<label>Quantity</label><input id="quantity" class="swal2-input" placeholder="Quantity" required>',
+                            focusConfirm: false,
+                            preConfirm: () => {
+                                return [
+                                    document.getElementById('category').value,
+                                    document.getElementById('productName').value,
+                                    document.getElementById('quantity').value
+                                ];
+                            }
+                        });
+                        if (formValues) {
+                            let category = JSON.stringify(formValues[0]).slice(1, -1);
+                            let productName = JSON.stringify(formValues[1]).slice(1, -1);
+                            let quantity = JSON.stringify(formValues[2]).slice(1, -1);
+                            $.post('Products', {category, productName, quantity}, function (result) {
+                            });
+                            location.reload();
+                        }
+
+                    })();
                         }
                     }
 
@@ -101,23 +129,23 @@ $(document).ready(function () {
                             width: '500px',
                             showCancelButton: true,
                             html:
-                                    '<label>Category</label><input id="category" class="swal2-input" value="' + v.category + '" required>' +
-                                    '<label>Name</label><input id="productName" class="swal2-input" value="' + v.productName + '"required>' +
-                                    '<label>Quantity</label><input id="quantity" class="swal2-input" value="' + v.quantity + '"required>',
+                                    '<label>Category</label><input id="category1" class="swal2-input" value="' + v.category + '" required>' +
+                                    '<label>Name</label><input id="productName1" class="swal2-input" value="' + v.productName + '"required>' +
+                                    '<label>Quantity</label><input id="quantity1" class="swal2-input" value="' + v.quantity + '"required>',
                             focusConfirm: false,
                             preConfirm: () => {
                                 return [
-                                    document.getElementById('category').value,
-                                    document.getElementById('productName').value,
-                                    document.getElementById('quantity').value
+                                    document.getElementById('category1').value,
+                                    document.getElementById('productName1').value,
+                                    document.getElementById('quantity1').value
                                 ];
                             }
                         });
                         if (formValues) {
-                            let category = JSON.stringify(formValues[0]).slice(1, -1);
-                            let productName = JSON.stringify(formValues[1]).slice(1, -1);
-                            let quantity = JSON.stringify(formValues[2]).slice(1, -1);
-                            $.post('Edit', {id: v.id, category: category, productName: productName, quantity: quantity}, function (result) {
+                            let category1 = JSON.stringify(formValues[0]).slice(1, -1);
+                            let productName1 = JSON.stringify(formValues[1]).slice(1, -1);
+                            let quantity1 = JSON.stringify(formValues[2]).slice(1, -1);
+                            $.post('Edit', {id: v.id, category: category1, productName: productName1, quantity: quantity1}, function (result) {
                                 alert('Value changed.');
                             });
                             location.reload();
